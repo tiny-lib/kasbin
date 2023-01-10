@@ -70,7 +70,7 @@ func Server(opts ...Option) middleware.Middleware {
 				return nil, ErrParseContextFailed
 			}
 			ctx = context.WithValue(ctx, enforcerContextCreatorKey, ctxCreator)
-			allowed, err = o.enforcer.Enforce(ctxCreator.CreateEnforcerContextWith()()...)
+			allowed, err = o.enforcer.Enforce(ctxCreator.CreateEnforcerContext()()...)
 			if err != nil {
 				return nil, err
 			}

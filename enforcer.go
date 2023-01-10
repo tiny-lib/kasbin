@@ -31,5 +31,5 @@ type EnforcerContext func(providers ...EnforcerContextProvider) []interface{}
 
 type EnforcerContextCreator interface {
 	ParseContext(ctx context.Context) error
-	CreateEnforcerContextWith() EnforcerContext
+	CreateEnforcerContext() EnforcerContext
 }
