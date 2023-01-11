@@ -27,9 +27,9 @@ package kasbin
 import "context"
 
 type EnforcerContextProvider func() interface{}
-type EnforcerContext func(providers ...EnforcerContextProvider) []interface{}
 
 type EnforcerContextCreator interface {
 	ParseContext(ctx context.Context) error
-	CreateEnforcerContext() EnforcerContext
+	WithProvider(providers ...EnforcerContextProvider)
+	GetEnforcerContext() []interface{}
 }

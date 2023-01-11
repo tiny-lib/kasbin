@@ -42,62 +42,64 @@ type Option interface {
 	apply(options *options)
 }
 
-type CasModel struct {
+type casModel struct {
 	m model.Model
 }
 
-func (c CasModel) apply(opt *options) {
+func (c casModel) apply(opt *options) {
 	opt.model = c.m
 }
 
 func WithModel(m model.Model) Option {
-	return CasModel{m: m}
+	return casModel{m: m}
 }
 
-type CasPolicy struct {
+type casPolicy struct {
 	p persist.Adapter
 }
 
-func (c CasPolicy) apply(opt *options) {
+func (c casPolicy) apply(opt *options) {
 	opt.policy = c.p
 }
 
 func WithPolicy(p persist.Adapter) Option {
-	return CasPolicy{p: p}
+	return casPolicy{p: p}
 }
 
-type CasEnforcer struct {
+type casEnforcer struct {
 	e *casbin.SyncedEnforcer
 }
 
-func (c CasEnforcer) apply(opt *options) {
+func (c casEnforcer) apply(opt *options) {
 	opt.enforcer = c.e
 }
 
 func WithEnforcer(e *casbin.SyncedEnforcer) Option {
-	return CasEnforcer{e: e}
+	return casEnforcer{e: e}
 }
 
-type CasEnforcerCtxCreator struct {
+type casEnforcerCtxCreator struct {
 	c EnforcerContextCreator
 }
 
-func (c CasEnforcerCtxCreator) apply(opt *options) {
+func (c casEnforcerCtxCreator) apply(opt *options) {
 	opt.enforcerContextCreator = c.c
 }
 
 func WithEnforcerContextCreator(c EnforcerContextCreator) Option {
-	return CasEnforcerCtxCreator{c: c}
+	return casEnforcerCtxCreator{c: c}
 }
 
-type CasUseBuiltin struct {
+type casUseBuiltin struct {
 	useBuiltinModel bool
 }
 
-func (c CasUseBuiltin) apply(opt *options) {
+func (c casUseBuiltin) apply(opt *options) {
 	opt.useBuiltinModel = c.useBuiltinModel
 }
 
-func UseBuiltinModelAsDefault(use bool) Option {
-	return CasUseBuiltin{useBuiltinModel: use}
+func UseBuiltinRBACIfModelUnset(flag bool) Option {
+	return casUseBuiltin{useBuiltinModel: flag}
 }
+
+// TODO:add flag to easy control enforcer policy load
