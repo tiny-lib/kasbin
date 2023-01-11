@@ -1,25 +1,9 @@
 /*
- * MIT License
- *
  * Copyright (c) 2023  czyt
+ * All rights reserved.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ *  Use of this source code is governed by a MIT License that can be
+ * found in the LICENSE file.
  */
 
 package kasbin
@@ -42,64 +26,64 @@ type Option interface {
 	apply(options *options)
 }
 
-type casModel struct {
+type ModelOpt struct {
 	m model.Model
 }
 
-func (c casModel) apply(opt *options) {
-	opt.model = c.m
+func (m ModelOpt) apply(opt *options) {
+	opt.model = m.m
 }
 
 func WithModel(m model.Model) Option {
-	return casModel{m: m}
+	return ModelOpt{m: m}
 }
 
-type casPolicy struct {
+type PolicyOpt struct {
 	p persist.Adapter
 }
 
-func (c casPolicy) apply(opt *options) {
-	opt.policy = c.p
+func (p PolicyOpt) apply(opt *options) {
+	opt.policy = p.p
 }
 
 func WithPolicy(p persist.Adapter) Option {
-	return casPolicy{p: p}
+	return PolicyOpt{p: p}
 }
 
-type casEnforcer struct {
+type EnforcerOpt struct {
 	e *casbin.SyncedEnforcer
 }
 
-func (c casEnforcer) apply(opt *options) {
-	opt.enforcer = c.e
+func (e EnforcerOpt) apply(opt *options) {
+	opt.enforcer = e.e
 }
 
 func WithEnforcer(e *casbin.SyncedEnforcer) Option {
-	return casEnforcer{e: e}
+	return EnforcerOpt{e: e}
 }
 
-type casEnforcerCtxCreator struct {
+type EnforcerCtxCreatorOpt struct {
 	c EnforcerContextCreator
 }
 
-func (c casEnforcerCtxCreator) apply(opt *options) {
-	opt.enforcerContextCreator = c.c
+func (e EnforcerCtxCreatorOpt) apply(opt *options) {
+	opt.enforcerContextCreator = e.c
 }
 
 func WithEnforcerContextCreator(c EnforcerContextCreator) Option {
-	return casEnforcerCtxCreator{c: c}
+	return EnforcerCtxCreatorOpt{c: c}
 }
 
-type casUseBuiltin struct {
+type UseBuiltinFlagOpt struct {
 	useBuiltinModel bool
 }
 
-func (c casUseBuiltin) apply(opt *options) {
-	opt.useBuiltinModel = c.useBuiltinModel
+func (u UseBuiltinFlagOpt) apply(opt *options) {
+	opt.useBuiltinModel = u.useBuiltinModel
 }
 
 func UseBuiltinRBACIfModelUnset(flag bool) Option {
-	return casUseBuiltin{useBuiltinModel: flag}
+	return UseBuiltinFlagOpt{useBuiltinModel: flag}
 }
 
 // TODO:add flag to easy control enforcer policy load
