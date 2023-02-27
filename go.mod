@@ -3,7 +3,7 @@ module github.com/czyt/kasbin
 go 1.19
 
 require (
-	github.com/casbin/casbin/v2 v2.60.0
+	github.com/casbin/casbin/v2 v2.64.0
 	github.com/go-kratos/kratos/v2 v2.5.3
 )
 
