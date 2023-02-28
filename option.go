@@ -18,6 +18,7 @@ type options struct {
 	model                  model.Model
 	policy                 persist.Adapter
 	enforcer               *casbin.SyncedEnforcer
+	watcher                persist.Watcher
 	enforcerContextCreator EnforcerContextCreator
 	useBuiltinModel        bool
 }
@@ -86,4 +87,14 @@ func UseBuiltinRBACIfModelUnset(flag bool) Option {
 	return UseBuiltinFlagOpt{useBuiltinModel: flag}
 }
 
-// TODO:add flag to easy control enforcer policy load
+type WatcherOpt struct {
+	watcher persist.Watcher
+}
+
+func (w WatcherOpt) apply(opt *options) {
+	opt.watcher = w.watcher
+}
+
+func WithWatcher(watcher persist.Watcher) Option {
+	return WatcherOpt{watcher: watcher}
+}
