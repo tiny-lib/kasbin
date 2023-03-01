@@ -40,6 +40,12 @@ func Server(opts ...Option) middleware.Middleware {
 		})
 		o.enforcer.SetWatcher(o.watcher)
 	}
+	// add policy autoload
+	if o.autoLoadPolicy && o.enforcer != nil {
+		if !o.enforcer.IsAutoLoadingRunning() {
+			o.enforcer.StartAutoLoadPolicy(o.autoLoadPolicyInterval)
+		}
+	}
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req interface{}) (interface{}, error) {
 			var (
