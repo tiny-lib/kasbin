@@ -12,6 +12,7 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/model"
 	"github.com/casbin/casbin/v2/persist"
+	"time"
 )
 
 type options struct {
@@ -21,6 +22,8 @@ type options struct {
 	watcher                persist.Watcher
 	enforcerContextCreator EnforcerContextCreator
 	useBuiltinModel        bool
+	autoLoadPolicy         bool
+	autoLoadPolicyInterval time.Duration
 }
 
 type Option interface {
@@ -35,6 +38,7 @@ func (m ModelOpt) apply(opt *options) {
 	opt.model = m.m
 }
 
+// WithModel 使用Model
 func WithModel(m model.Model) Option {
 	return ModelOpt{m: m}
 }
@@ -47,6 +51,7 @@ func (p PolicyOpt) apply(opt *options) {
 	opt.policy = p.p
 }
 
+// WithPolicy 使用Policy
 func WithPolicy(p persist.Adapter) Option {
 	return PolicyOpt{p: p}
 }
@@ -59,6 +64,7 @@ func (e EnforcerOpt) apply(opt *options) {
 	opt.enforcer = e.e
 }
 
+// WithEnforcer 使用Enforcer
 func WithEnforcer(e *casbin.SyncedEnforcer) Option {
 	return EnforcerOpt{e: e}
 }
@@ -71,6 +77,7 @@ func (e EnforcerCtxCreatorOpt) apply(opt *options) {
 	opt.enforcerContextCreator = e.c
 }
 
+// WithEnforcerContextCreator 使用EnforcerContextCreator实现
 func WithEnforcerContextCreator(c EnforcerContextCreator) Option {
 	return EnforcerCtxCreatorOpt{c: c}
 }
@@ -83,6 +90,7 @@ func (u UseBuiltinFlagOpt) apply(opt *options) {
 	opt.useBuiltinModel = u.useBuiltinModel
 }
 
+// UseBuiltinRBACIfModelUnset 当RBAC模型未设置时，使用内建RBAC模型
 func UseBuiltinRBACIfModelUnset(flag bool) Option {
 	return UseBuiltinFlagOpt{useBuiltinModel: flag}
 }
@@ -95,6 +103,21 @@ func (w WatcherOpt) apply(opt *options) {
 	opt.watcher = w.watcher
 }
 
+// WithWatcher 使用Watcher
 func WithWatcher(watcher persist.Watcher) Option {
 	return WatcherOpt{watcher: watcher}
+}
+
+type AutoLoadPolicyOpt struct {
+	autoLoadInterval time.Duration
+}
+
+func (a AutoLoadPolicyOpt) apply(opt *options) {
+	opt.autoLoadPolicy = true
+	opt.autoLoadPolicyInterval = a.autoLoadInterval
+}
+
+// WithAutoLoadPolicy 使用Policy自动加载
+func WithAutoLoadPolicy(interval time.Duration) Option {
+	return &AutoLoadPolicyOpt{autoLoadInterval: interval}
 }
