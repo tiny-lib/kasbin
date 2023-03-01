@@ -28,10 +28,18 @@ func Server(opts ...Option) middleware.Middleware {
 	for _, opt := range opts {
 		opt.apply(o)
 	}
+
 	if o.model == nil && o.useBuiltinModel {
 		o.model, _ = builtinmodel.LoadDefaultRBACModel()
 	}
 	o.enforcer, _ = casbin.NewSyncedEnforcer(o.model, o.policy)
+	// add watcher to its enforcer
+	if o.watcher != nil && o.enforcer != nil {
+		o.watcher.SetUpdateCallback(func(s string) {
+			o.enforcer.LoadPolicy()
+		})
+		o.enforcer.SetWatcher(o.watcher)
+	}
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req interface{}) (interface{}, error) {
 			var (
