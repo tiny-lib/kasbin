@@ -13,6 +13,7 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/czyt/kasbin/internal/builtinmodel"
 	"github.com/go-kratos/kratos/v2/middleware"
+	"time"
 )
 
 type contextKey string
@@ -42,7 +43,7 @@ func Server(opts ...Option) middleware.Middleware {
 	}
 	// add policy autoload
 	if o.autoLoadPolicy && o.enforcer != nil {
-		if !o.enforcer.IsAutoLoadingRunning() {
+		if !o.enforcer.IsAutoLoadingRunning() && o.autoLoadPolicyInterval > time.Duration(0) {
 			o.enforcer.StartAutoLoadPolicy(o.autoLoadPolicyInterval)
 		}
 	}
