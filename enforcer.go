@@ -15,8 +15,6 @@ type EnforcerContextProvider func() interface{}
 type EnforcerContextCreator interface {
 	// ParseContext Parse Context info from http
 	ParseContext(ctx context.Context) error
-	// WithProvider Provide the function to GetEnforcerContext
-	WithProvider(providers ...EnforcerContextProvider)
 	// GetEnforcerContext Call the EnforcerContextProviders by order and return its result
 	GetEnforcerContext() []interface{}
 }
