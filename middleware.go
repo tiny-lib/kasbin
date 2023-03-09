@@ -13,6 +13,7 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/czyt/kasbin/internal/builtinmodel"
 	"github.com/go-kratos/kratos/v2/middleware"
+	"time"
 )
 
 type contextKey string
@@ -28,10 +29,24 @@ func Server(opts ...Option) middleware.Middleware {
 	for _, opt := range opts {
 		opt.apply(o)
 	}
+
 	if o.model == nil && o.useBuiltinModel {
 		o.model, _ = builtinmodel.LoadDefaultRBACModel()
 	}
 	o.enforcer, _ = casbin.NewSyncedEnforcer(o.model, o.policy)
+	// add watcher to its enforcer
+	if o.watcher != nil && o.enforcer != nil {
+		o.watcher.SetUpdateCallback(func(s string) {
+			o.enforcer.LoadPolicy()
+		})
+		o.enforcer.SetWatcher(o.watcher)
+	}
+	// add policy autoload
+	if o.autoLoadPolicy && o.enforcer != nil {
+		if !o.enforcer.IsAutoLoadingRunning() && o.autoLoadPolicyInterval > time.Duration(0) {
+			o.enforcer.StartAutoLoadPolicy(o.autoLoadPolicyInterval)
+		}
+	}
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req interface{}) (interface{}, error) {
 			var (

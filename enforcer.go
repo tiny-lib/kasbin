@@ -15,8 +15,8 @@ type EnforcerContextProvider func() interface{}
 type EnforcerContextCreator interface {
 	// ParseContext Parse Context info from http
 	ParseContext(ctx context.Context) error
-	// WithProvider Provide the function to GetEnforcerContext
-	WithProvider(providers ...EnforcerContextProvider)
 	// GetEnforcerContext Call the EnforcerContextProviders by order and return its result
+	// for std rbac should be subject ,object, action
+	// for rbac with domain should be  subject,domain, object, action
 	GetEnforcerContext() []interface{}
 }
