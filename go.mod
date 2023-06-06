@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/casbin/casbin/v2 v2.69.1
-	github.com/go-kratos/kratos/v2 v2.6.1
+	github.com/go-kratos/kratos/v2 v2.6.2
 )
 
 require (
