@@ -1,4 +1,4 @@
-module github.com/czyt/kasbin
+module github.com/tiny-lib/kasbin
 
 go 1.19
 
