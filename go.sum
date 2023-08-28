@@ -1,7 +1,7 @@
 github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible h1:1G1pk05UrOh0NlF1oeaaix1x8XzrfjIDK47TY0Zehcw=
 github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible/go.mod h1:r7JcOSlj0wfOMncg0iLm8Leh48TZaKVeNIfJntJ2wa0=
-github.com/casbin/casbin/v2 v2.75.1 h1:TZpaeiIgS5jl6zhtwBCcYwpsSGdV63JbKiXsRE8b0k4=
-github.com/casbin/casbin/v2 v2.75.1/go.mod h1:mzGx0hYW9/ksOSpw3wNjk3NRAroq5VMFYUQ6G43iGPk=
+github.com/casbin/casbin/v2 v2.77.1 h1:+H46VamJCTlmCPcb0N99Zaj4tSorfuvBh3v5lyGopeU=
+github.com/casbin/casbin/v2 v2.77.1/go.mod h1:mzGx0hYW9/ksOSpw3wNjk3NRAroq5VMFYUQ6G43iGPk=
 github.com/czyt/kasbin v0.0.7 h1:PDzaWf4XIPQyLtgAJUAYDtmaJi+qL1d4XCcjpbOZL3Q=
 github.com/czyt/kasbin v0.0.7/go.mod h1:ZjqinC0PNgTYeUuo7+rCK/CubYkqsj9C9pBZ+2zm2cE=
 github.com/go-kratos/kratos/v2 v2.7.0 h1:9DaVgU9YoHPb/BxDVqeVlVCMduRhiSewG3xE+e9ZAZ8=
