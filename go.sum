@@ -4,8 +4,8 @@ github.com/casbin/casbin/v2 v2.77.2 h1:yQinn/w9x8AswiwqwtrXz93VU48R1aYTXdHEx4RI3
 github.com/casbin/casbin/v2 v2.77.2/go.mod h1:mzGx0hYW9/ksOSpw3wNjk3NRAroq5VMFYUQ6G43iGPk=
 github.com/czyt/kasbin v0.0.7 h1:PDzaWf4XIPQyLtgAJUAYDtmaJi+qL1d4XCcjpbOZL3Q=
 github.com/czyt/kasbin v0.0.7/go.mod h1:ZjqinC0PNgTYeUuo7+rCK/CubYkqsj9C9pBZ+2zm2cE=
-github.com/go-kratos/kratos/v2 v2.7.0 h1:9DaVgU9YoHPb/BxDVqeVlVCMduRhiSewG3xE+e9ZAZ8=
-github.com/go-kratos/kratos/v2 v2.7.0/go.mod h1:CPn82O93OLHjtnbuyOKhAG5TkSvw+mFnL32c4lZFDwU=
+github.com/go-kratos/kratos/v2 v2.7.1 h1:PNMUaWxS5ZGDp1EyID5ZosJb1OA/YiHnBxB0yUmocnc=
+github.com/go-kratos/kratos/v2 v2.7.1/go.mod h1:CPn82O93OLHjtnbuyOKhAG5TkSvw+mFnL32c4lZFDwU=
 github.com/golang/mock v1.4.4 h1:l75CXGRSwbaYNpl/Z2X1XIIAMSCquvXgpVZDhwEIJsc=
 github.com/golang/mock v1.4.4/go.mod h1:l3mdAwkq5BuhzHwde/uurv3sEJeZMXNpwsxVWU71h+4=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
